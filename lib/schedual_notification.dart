@@ -1,41 +1,9 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:locale_notifications/data.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-class NotificationService {
+class NotificationService with Data {
   NotificationService();
-
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-
-  final BehaviorSubject<String?> onNotificationClick = BehaviorSubject();
-
-  Future<void> initNotification() async {
-    tz.initializeTimeZones();
-    // Android initialization
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('card6');
-
-    // ios initialization
-    IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings(
-      requestAlertPermission: true,
-      requestBadgePermission: true,
-      requestSoundPermission: true,
-      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-    );
-
-    InitializationSettings initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: initializationSettingsIOS,
-    );
-    // the initialization settings are initialized after they are setted
-    await flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
-      onSelectNotification: onSelectNotification,
-    );
-  }
 
   Future<NotificationDetails> _notificationDetails() async {
     const AndroidNotificationDetails androidNotificationDetails =
@@ -44,6 +12,7 @@ class NotificationService {
       'Main Channel',
       channelDescription: "ashwin",
       importance: Importance.max,
+      //Added sound >> if you want to change it go to android >> app >> main >> res >> raw
       sound: RawResourceAndroidNotificationSound('sound1'),
       playSound: true,
       priority: Priority.max,
@@ -61,6 +30,7 @@ class NotificationService {
     );
   }
 
+  /// =========Default Locale Notification
   Future<void> showNotification1({
     required int id,
     required String title,
@@ -70,6 +40,7 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.show(id, title, body, details);
   }
 
+  ///===========Payload Notification >> if the user tap it it opens in app in second screen
   Future<void> showPayloadNotification1({
     required int id,
     required String title,
@@ -86,6 +57,7 @@ class NotificationService {
     );
   }
 
+  ///===Scheduled Notification that occurred with specific duration======
   Future<void> showScheduledNotification1({
     required int id,
     required String title,
@@ -106,18 +78,5 @@ class NotificationService {
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
-  }
-
-  void onDidReceiveLocalNotification(
-      int id, String? title, String? body, String? payload) {
-    print('id $id');
-  }
-
-  ///this if user tap to notification do an action.
-  void onSelectNotification(String? payload) {
-    print('payload $payload');
-    if (payload != null && payload.isNotEmpty) {
-      onNotificationClick.add(payload);
-    }
   }
 }
