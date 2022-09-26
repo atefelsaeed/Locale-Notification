@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:locale_notifications/Widgets/item_btn.dart';
 import 'package:locale_notifications/second_screen.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -84,88 +85,49 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: GestureDetector(
-                onTap: () async {
-                  await service.showNotification1(
-                    id: 0,
-                    title: Notification_title.text.isEmpty
-                        ? "title Scheduled"
-                        : Notification_title.text,
-                    body: Notification_descrp.text.isEmpty
-                        ? "body Scheduled"
-                        : Notification_descrp.text,
-                  );
-                },
-                child: Container(
-                  height: 40,
-                  width: 200,
-                  color: Colors.green,
-                  child: const Center(
-                    child: Text(
-                      "Show Notification",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
+            ItemButton(
+              function: () async {
+                await service.showNotification1(
+                  id: 0,
+                  title: Notification_title.text.isEmpty
+                      ? "title Scheduled"
+                      : Notification_title.text,
+                  body: Notification_descrp.text.isEmpty
+                      ? "body Scheduled"
+                      : Notification_descrp.text,
+                );
+              },
+              btnTitle: "Show Notification",
             ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: GestureDetector(
-                onTap: () async {
-                  await service.showPayloadNotification1(
-                    id: 2,
-                    title: Notification_title.text.isEmpty
-                        ? "title Scheduled"
-                        : Notification_title.text,
-                    body: Notification_descrp.text.isEmpty
-                        ? "body Scheduled"
-                        : Notification_descrp.text,
-                    payload: "Payload Navigation",
-                  );
-                },
-                child: Container(
-                  height: 40,
-                  width: 200,
-                  color: Colors.green,
-                  child: const Center(
-                    child: Text(
-                      "Show Payload Notification",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
+            ItemButton(
+              function: () async {
+                await service.showPayloadNotification1(
+                  id: 2,
+                  title: Notification_title.text.isEmpty
+                      ? "title Scheduled"
+                      : Notification_title.text,
+                  body: Notification_descrp.text.isEmpty
+                      ? "body Scheduled"
+                      : Notification_descrp.text,
+                  payload: "Payload Navigation",
+                );
+              },
+              btnTitle: "Show Payload Notification",
             ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: GestureDetector(
-                onTap: () async {
-                  await service.showScheduledNotification1(
-                    id: 1,
-                    title: Notification_title.text.isEmpty
-                        ? "title Scheduled"
-                        : Notification_title.text,
-                    body: Notification_descrp.text.isEmpty
-                        ? "body Scheduled"
-                        : Notification_descrp.text,
-                    seconds: 4,
-                  );
-                },
-                child: Container(
-                  height: 40,
-                  width: 200,
-                  color: Colors.green,
-                  child: const Center(
-                    child: Text(
-                      "Show Scheduled Notification",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
+            ItemButton(
+              function: () async {
+                await service.showScheduledNotification1(
+                  id: 1,
+                  title: Notification_title.text.isEmpty
+                      ? "title Scheduled"
+                      : Notification_title.text,
+                  body: Notification_descrp.text.isEmpty
+                      ? "body Scheduled"
+                      : Notification_descrp.text,
+                  seconds: 4,
+                );
+              },
+              btnTitle: "Show Scheduled Notification",
             ),
           ],
         ),
