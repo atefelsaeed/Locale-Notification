@@ -9,14 +9,14 @@ This is Locale Notification App.
 #In AndroidManifest.xml
 Add:
 
-#1
- <uses-permission android:name="android.permission.VIBRATE" />
- <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
- #2
- under  <activity add
+##1
+ uses-permission android:name="android.permission.VIBRATE" 
+ uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED".
+##2
+ **under**  activity add
                    android:turnScreenOn="true"
-           >
- #3
+           
+##3
   <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
            <intent-filter>
                <action android:name="android.intent.action.BOOT_COMPLETED"/>
