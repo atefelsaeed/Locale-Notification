@@ -4,11 +4,11 @@ This is Locale Notification App.
 
 ## Getting Started
 
-# Set-Up
+## Set-Up
 
-# In AndroidManifest.xml
+### In AndroidManifest.xml
 
-### Add:
+#### Add:
 
 **#1**
  ```xml
@@ -29,16 +29,16 @@ This is Locale Notification App.
            </intent-filter>
        </receiver>.
 ```
-# pubspec.yaml
+### pubspec.yaml
 
-### Add:
+#### Add:
 ```xml 
 flutter_local_notifications: ^9.7.0
 rxdart: ^0.27.5
 timezone: ^0.8.0
 ```
-# app build.gradle
-### Add:
+### app build.gradle
+#### Add:
 ```xml
 compileSdkVersion 33
 minSdkVersion 21
@@ -48,4 +48,9 @@ multiDexEnabled true
 **dependencies**
 coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 ```
-
+### build.gradle
+#### Add:
+```xml
+**dependencies**
+classpath 'com.android.tools.build:gradle:4.2.2'
+```
