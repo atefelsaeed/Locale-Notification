@@ -58,78 +58,87 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .1,
-            ),
-            const Text("Enter your Notification Data !"),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: TextField(
-                controller: Notification_title,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Enter Title",
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .1,
+              ),
+              const Text("Enter your Notification Data !"),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: TextField(
+                  controller: Notification_title,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Enter Title",
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: TextField(
-                controller: Notification_descrp,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Enter Description",
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: TextField(
+                  controller: Notification_descrp,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Enter Description",
+                  ),
                 ),
               ),
-            ),
-            ItemButton(
-              function: () async {
-                await service.showNotification1(
-                  id: 0,
-                  title: Notification_title.text.isEmpty
-                      ? "title Scheduled"
-                      : Notification_title.text,
-                  body: Notification_descrp.text.isEmpty
-                      ? "body Scheduled"
-                      : Notification_descrp.text,
-                );
-              },
-              btnTitle: "Show Notification",
-            ),
-            ItemButton(
-              function: () async {
-                await service.showPayloadNotification1(
-                  id: 2,
-                  title: Notification_title.text.isEmpty
-                      ? "title Scheduled"
-                      : Notification_title.text,
-                  body: Notification_descrp.text.isEmpty
-                      ? "body Scheduled"
-                      : Notification_descrp.text,
-                  payload: "Payload Navigation",
-                );
-              },
-              btnTitle: "Show Payload Notification",
-            ),
-            ItemButton(
-              function: () async {
-                await service.showScheduledNotification1(
-                  id: 1,
-                  title: Notification_title.text.isEmpty
-                      ? "title Scheduled"
-                      : Notification_title.text,
-                  body: Notification_descrp.text.isEmpty
-                      ? "body Scheduled"
-                      : Notification_descrp.text,
-                  seconds: 4,
-                );
-              },
-              btnTitle: "Show Scheduled Notification",
-            ),
-          ],
+              const Text(
+                  'Show Notification: This is the default notification.'),
+              ItemButton(
+                function: () async {
+                  await service.showNotification1(
+                    id: 0,
+                    title: Notification_title.text.isEmpty
+                        ? "title Scheduled"
+                        : Notification_title.text,
+                    body: Notification_descrp.text.isEmpty
+                        ? "body Scheduled"
+                        : Notification_descrp.text,
+                  );
+                },
+                btnTitle: "Show Notification",
+              ),
+              const Text(
+                  'Show Payload Notification: If you taped this notification it opened on the second screen.'),
+              ItemButton(
+                function: () async {
+                  await service.showPayloadNotification1(
+                    id: 2,
+                    title: Notification_title.text.isEmpty
+                        ? "title Scheduled"
+                        : Notification_title.text,
+                    body: Notification_descrp.text.isEmpty
+                        ? "body Scheduled"
+                        : Notification_descrp.text,
+                    payload: "Payload Navigation",
+                  );
+                },
+                btnTitle: "Show Payload Notification",
+              ),
+              const Text(
+                  'Show Scheduled Notification: This will be pushed after 4 seconds.'),
+              ItemButton(
+                function: () async {
+                  await service.showScheduledNotification1(
+                    id: 1,
+                    title: Notification_title.text.isEmpty
+                        ? "title Scheduled"
+                        : Notification_title.text,
+                    body: Notification_descrp.text.isEmpty
+                        ? "body Scheduled"
+                        : Notification_descrp.text,
+                    seconds: 4,
+                  );
+                },
+                btnTitle: "Show Scheduled Notification",
+              ),
+            ],
+          ),
         ),
       ),
     );
