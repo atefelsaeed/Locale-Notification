@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ItemButton extends StatelessWidget {
-  const ItemButton({Key? key, required this.function, required this.btnTitle}) : super(key: key);
+  const ItemButton({Key? key, required this.function, required this.btnTitle})
+      : super(key: key);
   final Function function;
   final String btnTitle;
 
@@ -14,9 +16,13 @@ class ItemButton extends StatelessWidget {
           function();
         },
         child: Container(
+          decoration: BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.circular(15),
+          ),
           height: 40,
           width: 200,
-          color: Colors.green,
+
           child: Center(
             child: Text(
               btnTitle,

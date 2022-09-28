@@ -1,5 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:locale_notifications/data.dart';
+import 'package:locale_notifications/Data/data.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService with Data {

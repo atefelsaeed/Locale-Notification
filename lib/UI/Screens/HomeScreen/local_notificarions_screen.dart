@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:locale_notifications/Widgets/item_btn.dart';
-import 'package:locale_notifications/second_screen.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
-import 'schedual_notification.dart';
+import '../../../Data/schedual_notification.dart';
+import '../SecondScreen/second_screen.dart';
+import 'Widgets/item_btn.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class LocaleNotificationScreen extends StatefulWidget {
+  const LocaleNotificationScreen({Key? key, required this.title})
+      : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _LocaleNotificationScreenState createState() =>
+      _LocaleNotificationScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController Notification_title = TextEditingController();
-  TextEditingController Notification_descrp = TextEditingController();
-
+class _LocaleNotificationScreenState extends State<LocaleNotificationScreen> {
+  TextEditingController notificationTitle = TextEditingController();
+  TextEditingController notificationDescription = TextEditingController();
   late final NotificationService service;
 
   void listenToNotification() =>
@@ -30,12 +31,12 @@ class _MyHomePageState extends State<MyHomePage> {
         MaterialPageRoute(
           builder: (context) => SecondScreen(
             payload: payload,
-            notificationTitle: Notification_title.text.isEmpty
+            notificationTitle: notificationTitle.text.isEmpty
                 ? "Notification title"
-                : Notification_title.text,
-            notificationDescriptions: Notification_descrp.text.isEmpty
+                : notificationTitle.text,
+            notificationDescriptions: notificationDescription.text.isEmpty
                 ? "Notification Descriptions"
-                : Notification_descrp.text,
+                : notificationDescription.text,
           ),
         ),
       );
@@ -52,10 +53,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void dispose() {
+    notificationTitle.dispose();
+    notificationDescription.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -63,14 +72,15 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * .1,
+              Text(
+                "Enter your Notification Data !",
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.055),
               ),
-              const Text("Enter your Notification Data !"),
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(15),
                 child: TextField(
-                  controller: Notification_title,
+                  controller: notificationTitle,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Enter Title",
@@ -78,9 +88,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(10),
                 child: TextField(
-                  controller: Notification_descrp,
+                  controller: notificationDescription,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Enter Description",
@@ -93,12 +103,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 function: () async {
                   await service.showNotification1(
                     id: 0,
-                    title: Notification_title.text.isEmpty
+                    title: notificationTitle.text.isEmpty
                         ? "title Scheduled"
-                        : Notification_title.text,
-                    body: Notification_descrp.text.isEmpty
+                        : notificationTitle.text,
+                    body: notificationDescription.text.isEmpty
                         ? "body Scheduled"
-                        : Notification_descrp.text,
+                        : notificationDescription.text,
                   );
                 },
                 btnTitle: "Show Notification",
@@ -109,12 +119,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 function: () async {
                   await service.showPayloadNotification1(
                     id: 2,
-                    title: Notification_title.text.isEmpty
+                    title: notificationTitle.text.isEmpty
                         ? "title Scheduled"
-                        : Notification_title.text,
-                    body: Notification_descrp.text.isEmpty
+                        : notificationTitle.text,
+                    body: notificationDescription.text.isEmpty
                         ? "body Scheduled"
-                        : Notification_descrp.text,
+                        : notificationDescription.text,
                     payload: "Payload Navigation",
                   );
                 },
@@ -126,12 +136,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 function: () async {
                   await service.showScheduledNotification1(
                     id: 1,
-                    title: Notification_title.text.isEmpty
+                    title: notificationTitle.text.isEmpty
                         ? "title Scheduled"
-                        : Notification_title.text,
-                    body: Notification_descrp.text.isEmpty
+                        : notificationTitle.text,
+                    body: notificationDescription.text.isEmpty
                         ? "body Scheduled"
-                        : Notification_descrp.text,
+                        : notificationDescription.text,
                     seconds: 4,
                   );
                 },

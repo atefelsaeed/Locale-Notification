@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:locale_notifications/schedual_notification.dart';
-import 'package:locale_notifications/test_local_notificarions.dart';
+import 'package:locale_notifications/Data/schedual_notification.dart';
+import 'package:locale_notifications/UI/Screens/HomeScreen/local_notificarions_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: const MyHomePage(
+      home: const LocaleNotificationScreen(
         title: 'Locale Notification',
       ),
     );
