@@ -2,6 +2,10 @@
 
 This is Locale Notification App.
 
+
+https://user-images.githubusercontent.com/36440426/192725735-86c7eea7-f16c-42c4-a7f3-9ff84dbab9eb.mp4
+
+
 ## Getting Started
 
 ## Set-Up
